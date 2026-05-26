@@ -1,0 +1,265 @@
+{
+  "name": "ikame-claude-code",
+  "displayName": "Ikame Claude Code",
+  "description": "Claude Code for VS Code with full skills, agents, and memory support",
+  "version": "0.1.0",
+  "publisher": "ikame",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ikame/ikame-claude-code"
+  },
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": ["AI", "Chat", "Other"],
+  "keywords": ["claude", "anthropic", "ai", "coding", "assistant"],
+  "activationEvents": ["onStartupFinished"],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "ikame-claude.openPanel",
+        "title": "Open Ikame Claude",
+        "icon": "$(comment-discussion)"
+      },
+      {
+        "command": "ikame-claude.openSidebar",
+        "title": "Open Ikame Claude in Sidebar",
+        "icon": "$(comment-discussion)"
+      },
+      {
+        "command": "ikame-claude.newConversation",
+        "title": "New Session",
+        "icon": "$(comment-add)"
+      },
+      {
+        "command": "ikame-claude.openMemoryManager",
+        "title": "Open Memory Manager",
+        "icon": "$(database)"
+      },
+      {
+        "command": "ikame-claude.openAgentManager",
+        "title": "Open Agent Manager",
+        "icon": "$(robot)"
+      },
+      {
+        "command": "ikame-claude.openSkillEditor",
+        "title": "Open Skill Editor",
+        "icon": "$(symbol-function)"
+      },
+      {
+        "command": "ikame-claude.openNewTab",
+        "title": "Open in New Tab",
+        "category": "Ikame Claude"
+      },
+      {
+        "command": "ikame-claude.focusInput",
+        "title": "Focus Claude Input",
+        "category": "Ikame Claude"
+      },
+      {
+        "command": "ikame-claude.insertAtMention",
+        "title": "Insert @mention",
+        "category": "Ikame Claude"
+      },
+      {
+        "command": "ikame-claude.showLogs",
+        "title": "Show Logs",
+        "category": "Ikame Claude"
+      },
+      {
+        "command": "ikame-claude.stopGeneration",
+        "title": "Stop Generation",
+        "category": "Ikame Claude"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "ikame-claude",
+          "title": "Ikame Claude Code",
+          "icon": "resources/icons/logo_128.png"
+        }
+      ]
+    },
+    "views": {
+      "ikame-claude": [
+        {
+          "type": "webview",
+          "id": "ikame-claude.chatView",
+          "name": "Chat",
+          "visibility": "visible"
+        },
+        {
+          "id": "ikame-claude.skillsView",
+          "name": "Skills",
+          "visibility": "collapsed"
+        },
+        {
+          "id": "ikame-claude.agentsView",
+          "name": "Agents",
+          "visibility": "collapsed"
+        },
+        {
+          "id": "ikame-claude.memoryView",
+          "name": "Memory",
+          "visibility": "collapsed"
+        }
+      ]
+    },
+    "menus": {
+      "view/title": [
+        {
+          "command": "ikame-claude.newConversation",
+          "when": "view == ikame-claude.chatView",
+          "group": "navigation"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "ikame-claude.openPanel",
+          "group": "ikame-claude@1"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "ikame-claude.focusInput",
+        "key": "ctrl+escape",
+        "mac": "cmd+escape",
+        "when": "editorFocus"
+      },
+      {
+        "command": "ikame-claude.openNewTab",
+        "key": "ctrl+shift+escape",
+        "mac": "cmd+shift+escape"
+      },
+      {
+        "command": "ikame-claude.insertAtMention",
+        "key": "alt+k",
+        "when": "editorFocus"
+      },
+      {
+        "command": "ikame-claude.newConversation",
+        "key": "ctrl+n",
+        "when": "ikame-claude.chatFocused"
+      }
+    ],
+    "configuration": {
+      "title": "Ikame Claude Code",
+      "properties": {
+        "ikameClaude.claudeExecutablePath": {
+          "type": "string",
+          "default": "",
+          "description": "Path to claude.exe (auto-detected if empty)"
+        },
+        "ikameClaude.model": {
+          "type": "string",
+          "default": "claude-sonnet-4-6",
+          "enum": [
+            "claude-opus-4-7",
+            "claude-sonnet-4-6",
+            "claude-haiku-4-5-20251001"
+          ],
+          "description": "Default Claude model to use"
+        },
+        "ikameClaude.preferredLocation": {
+          "type": "string",
+          "default": "sidebar",
+          "enum": ["sidebar", "panel", "editor"],
+          "description": "Where to open the Claude chat UI"
+        },
+        "ikameClaude.autoLoadMemory": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically load memory context for the current project"
+        },
+        "ikameClaude.skillsDirectory": {
+          "type": "string",
+          "default": "",
+          "description": "Override skills directory (default: ~/.claude/skills)"
+        },
+        "ikameClaude.enableSkillAutocomplete": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable / autocomplete for skill names in chat"
+        },
+        "ikameClaude.useCtrlEnterToSend": {
+          "type": "boolean",
+          "default": false,
+          "description": "Use Ctrl+Enter to send messages"
+        },
+        "ikameClaude.enableNewConversationShortcut": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable Ctrl+N shortcut for new conversation"
+        },
+        "ikameClaude.autosave": {
+          "type": "boolean",
+          "default": true,
+          "description": "Auto-save files before Claude reads them"
+        },
+        "ikameClaude.respectGitIgnore": {
+          "type": "boolean",
+          "default": true,
+          "description": "Respect .gitignore in file searches"
+        },
+        "ikameClaude.environmentVariables": {
+          "type": "object",
+          "default": {},
+          "description": "Extra environment variables for the Claude process"
+        },
+        "ikameClaude.initialPermissionMode": {
+          "type": "string",
+          "enum": ["default", "acceptEdits", "plan", "auto", "bypassPermissions"],
+          "default": "default",
+          "description": "Default permission mode"
+        }
+      }
+    },
+    "languages": [
+      {
+        "id": "claude-skill",
+        "aliases": ["Claude Skill", "claude-skill"],
+        "extensions": [],
+        "filenamePatterns": ["**/.claude/skills/*.md", "**/.claude/agents/*.md"]
+      }
+    ],
+    "grammars": [
+      {
+        "language": "claude-skill",
+        "scopeName": "text.claude.skill",
+        "path": "./syntaxes/claude-skill.tmGrammar.json"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run build:prod",
+    "build": "webpack --mode development",
+    "build:prod": "webpack --mode production",
+    "deploy": "webpack --mode development && node -e \"const fs=require('fs');const path=require('path');const ext='C:/Users/PC/.vscode/extensions/ikame.ikame-claude-code-0.1.0';const d=ext+'/dist';fs.mkdirSync(d+'/webview',{recursive:true});fs.copyFileSync('dist/extension.js',d+'/extension.js');fs.copyFileSync('dist/webview/index.js',d+'/webview/index.js');fs.copyFileSync('dist/webview/sidebar.js',d+'/webview/sidebar.js');fs.copyFileSync('package.json',ext+'/package.json');function cpDir(src,dst){fs.mkdirSync(dst,{recursive:true});for(const f of fs.readdirSync(src)){const s=path.join(src,f),t=path.join(dst,f);fs.statSync(s).isDirectory()?cpDir(s,t):fs.copyFileSync(s,t);}}cpDir('resources',ext+'/resources');console.log('Deployed!')\"",
+    "watch": "webpack --mode development --watch",
+    "watch:webview": "webpack --config webpack.webview.config.js --mode development --watch",
+    "lint": "eslint src --ext ts,tsx",
+    "test": "node ./out/test/runTest.js",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.85.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "copy-webpack-plugin": "^12.0.0",
+    "css-loader": "^6.0.0",
+    "eslint": "^8.0.0",
+    "style-loader": "^3.0.0",
+    "ts-loader": "^9.0.0",
+    "typescript": "^5.3.0",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.0"
+  },
+  "dependencies": {
+    "marked": "^9.1.0"
+  }
+}

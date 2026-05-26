@@ -1,0 +1,27 @@
+{
+  "name": "Claude Skill",
+  "scopeName": "text.claude.skill",
+  "fileTypes": [],
+  "patterns": [
+    {
+      "comment": "YAML frontmatter",
+      "begin": "\\A---\\s*$",
+      "end": "^---\\s*$",
+      "name": "meta.embedded.block.yaml",
+      "contentName": "source.yaml",
+      "patterns": [
+        { "include": "source.yaml" }
+      ]
+    },
+    {
+      "comment": "Skill trigger line",
+      "match": "^(TRIGGER)\\s+(when:|if:)(.*)$",
+      "captures": {
+        "1": { "name": "keyword.control.skill" },
+        "2": { "name": "keyword.operator.skill" },
+        "3": { "name": "string.unquoted.skill" }
+      }
+    },
+    { "include": "text.html.markdown" }
+  ]
+}
