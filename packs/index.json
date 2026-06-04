@@ -1,0 +1,56 @@
+[
+  {
+    "id": "web-dev",
+    "name": "Web Development",
+    "description": "Full-stack web team — từ database đến frontend, CI/CD và bảo mật",
+    "icon": "globe",
+    "agents": ["tech-lead", "backend-dev", "frontend-dev", "database-engineer", "code-reviewer", "qa-engineer", "devops", "security-reviewer"],
+    "skills": ["implement-feature", "code-review", "fix-bug"],
+    "rules": ["coding-standards", "git-workflow"]
+  },
+  {
+    "id": "mobile-android",
+    "name": "Android Development",
+    "description": "Team chuyên Android native — Kotlin, Jetpack Compose, MVVM",
+    "icon": "device-mobile",
+    "agents": ["tech-lead", "android-dev", "backend-dev", "code-reviewer", "qa-engineer", "security-reviewer"],
+    "skills": ["implement-feature", "code-review", "fix-bug"],
+    "rules": ["coding-standards", "git-workflow"]
+  },
+  {
+    "id": "mobile-ios",
+    "name": "iOS Development",
+    "description": "Team chuyên iOS native — Swift, SwiftUI, Clean Architecture",
+    "icon": "device-mobile",
+    "agents": ["tech-lead", "ios-dev", "backend-dev", "code-reviewer", "qa-engineer", "security-reviewer"],
+    "skills": ["implement-feature", "code-review", "fix-bug"],
+    "rules": ["coding-standards", "git-workflow"]
+  },
+  {
+    "id": "mobile-crossplatform-rn",
+    "name": "Mobile Cross-Platform (React Native)",
+    "description": "Team React Native — 1 codebase chạy iOS + Android bằng TypeScript",
+    "icon": "device-mobile",
+    "agents": ["tech-lead", "react-native-dev", "backend-dev", "code-reviewer", "qa-engineer", "security-reviewer"],
+    "skills": ["implement-feature", "code-review", "fix-bug"],
+    "rules": ["coding-standards", "git-workflow"]
+  },
+  {
+    "id": "mobile-crossplatform-flutter",
+    "name": "Mobile Cross-Platform (Flutter)",
+    "description": "Team Flutter — 1 codebase chạy iOS + Android + Web bằng Dart",
+    "icon": "device-mobile",
+    "agents": ["tech-lead", "flutter-dev", "backend-dev", "code-reviewer", "qa-engineer", "security-reviewer"],
+    "skills": ["implement-feature", "code-review", "fix-bug"],
+    "rules": ["coding-standards", "git-workflow"]
+  },
+  {
+    "id": "fullstack",
+    "name": "Full-Stack Team",
+    "description": "Team đầy đủ mọi chuyên gia — web, database, DevOps, security",
+    "icon": "server",
+    "agents": ["tech-lead", "backend-dev", "frontend-dev", "database-engineer", "code-reviewer", "qa-engineer", "devops", "security-reviewer"],
+    "skills": ["implement-feature", "code-review", "fix-bug"],
+    "rules": ["coding-standards", "git-workflow"]
+  }
+]
