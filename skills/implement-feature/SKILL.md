@@ -27,32 +27,40 @@ Trình bày với user:
 
 Sau khi user approve, đánh giá độ lớn của tính năng:
 
-### Tính năng nhỏ / ít task
-- Tạo TaskList thông thường (tool `TaskCreate`) để track từng bước
+### Tính năng nhỏ / ≤ 4 bước
+- Dùng `TaskCreate` để track từng bước trong session hiện tại
 - Thực hiện trực tiếp theo plan
 
-### Tính năng lớn / nhiều agent / build cả dự án
-- **Tạo file tasklist** lưu tại thư mục gốc của project:
-  - Tên file: `plan-{tên_tính_năng_hoặc_dự_án}.md`
-  - Ví dụ: `plan-build_auth_system.md`, `plan-refactor_dashboard.md`
-- Format file:
+### Tính năng lớn / ≥ 5 bước / build cả dự án
+- **Tạo Goal** bằng cách ghi file `~/.claude/ikame-goal-request.json`:
 
-```markdown
-# Plan: {Tên tính năng}
-
-## Tasks
-
-- [ ] Task 1: ...
-- [ ] Task 2: ...
-- [ ] Task 3: ...
-...
-
-## Notes
-- Ghi chú thêm về dependencies, decisions, v.v.
+```json
+{
+  "title": "Tên tính năng ngắn gọn (max 60 chars)",
+  "description": "Mô tả tính năng và lý do triển khai",
+  "steps": [
+    { "description": "Bước 1 cụ thể" },
+    { "description": "Bước 2 cụ thể" }
+  ]
+}
 ```
 
-- **Lý do dùng file thay vì TaskList tool:** Khi context window đầy và bị compact, file vẫn tồn tại trên disk. Lần sau mở lại, Claude đọc file này để biết đang làm đến đâu.
-- **Quy tắc cập nhật:** Làm xong task nào → ngay lập tức cập nhật `- [ ]` thành `- [x]` trong file đó. Không batch update.
+- Extension tự động tạo Goal và hiển thị trong Goals panel
+- **Cập nhật progress** sau mỗi bước hoàn thành bằng cách ghi `~/.claude/ikame-goal-update.json`:
+
+```json
+{
+  "goalTitle": "Tên tính năng (phải khớp với title đã tạo)",
+  "steps": [
+    { "description": "Bước 1", "status": "completed" },
+    { "description": "Bước 2", "status": "active" },
+    { "description": "Bước 3", "status": "pending" }
+  ]
+}
+```
+
+- **KHÔNG** ghi lại `ikame-goal-request.json` để update — chỉ dùng file đó để tạo goal mới
+- **Lý do dùng Goals thay vì TaskList:** Goals persist qua nhiều sessions. Khi context bị compact hoặc session mới, goal vẫn còn và Claude có thể resume từ đúng bước đang dở
 
 ## Phase 4 — Parallel Implementation
 
