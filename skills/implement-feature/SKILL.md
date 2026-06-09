@@ -46,20 +46,20 @@ Sau khi user approve, đánh giá độ lớn của tính năng:
 ```
 
 - Extension tự động tạo Goal và hiển thị trong Goals panel
-- **Cập nhật progress** sau mỗi bước hoàn thành bằng cách ghi `~/.claude/ikame-goal-update.json`:
+- **Cập nhật progress** sau mỗi bước hoàn thành bằng cách ghi `~/.claude/ikame-goal-request.json` với `goalTitle` (⚠️ KHÔNG dùng `title`):
 
 ```json
 {
-  "goalTitle": "Tên tính năng (phải khớp với title đã tạo)",
+  "goalTitle": "Tên tính năng (phải khớp chính xác với title đã tạo)",
   "steps": [
     { "description": "Bước 1", "status": "completed" },
-    { "description": "Bước 2", "status": "active" },
-    { "description": "Bước 3", "status": "pending" }
+    { "description": "Bước 2", "status": "active" }
   ]
 }
 ```
 
-- **KHÔNG** ghi lại `ikame-goal-request.json` để update — chỉ dùng file đó để tạo goal mới
+- Dùng cùng 1 file `ikame-goal-request.json` cho cả create lẫn update. Extension phân biệt qua fields: `title` → tạo mới, `goalTitle`/`goalId` → update
+- Khi tất cả steps `completed`, goal tự động chuyển sang Completed
 - **Lý do dùng Goals thay vì TaskList:** Goals persist qua nhiều sessions. Khi context bị compact hoặc session mới, goal vẫn còn và Claude có thể resume từ đúng bước đang dở
 
 ## Phase 4 — Parallel Implementation
