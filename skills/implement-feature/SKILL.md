@@ -1,6 +1,7 @@
 ---
 name: implement-feature
 description: Full feature implementation — tech lead planning → user confirmation → parallel agents → review → QA → browser verify → done
+autoload: true
 ---
 
 # Skill: Implement Feature
@@ -32,7 +33,8 @@ Sau khi user approve, đánh giá độ lớn của tính năng:
 - Thực hiện trực tiếp theo plan
 
 ### Tính năng lớn / ≥ 5 bước / build cả dự án
-- **Tạo Goal** bằng cách ghi file `~/.claude/ikame-goal-request.json`:
+- **Bắt buộc invoke `Skill("goals")`** để kích hoạt goal tracking trước khi bắt đầu implement
+- `Skill("goals")` sẽ hướng dẫn tạo goal qua file `~/.claude/ikame-goal-request.json`:
 
 ```json
 {
