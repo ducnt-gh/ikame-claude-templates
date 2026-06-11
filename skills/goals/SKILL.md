@@ -94,8 +94,9 @@ Or with `goalId` (preferred when available from resume context):
 - `goalId` is provided in the resume context when user clicks "Continue" — always prefer it over `goalTitle`
 - Only include steps that changed — other steps are untouched
 - Valid statuses: `"pending"`, `"active"`, `"completed"`
-- Write right after completing each step
+- **Write immediately after completing each step** — do NOT batch updates or wait until everything is done. Tick each step the moment it finishes.
 - **Never include `title` in an update** — it creates a brand-new goal
+- **When the entire task is done:** mark ALL steps as `completed` — do NOT just report to the user verbally. The goal panel must reflect reality.
 
 **Detection:** `goalId` or `goalTitle` present → update existing goal. `title` present → create new goal.
 
