@@ -48,18 +48,18 @@ Sau khi user approve, đánh giá độ lớn của tính năng:
 ```
 
 - Extension tự động tạo Goal và hiển thị trong Goals panel
-- **Cập nhật progress** sau mỗi bước hoàn thành bằng cách ghi `~/.claude/ikame-goal-request.json` với `goalTitle` (⚠️ KHÔNG dùng `title`):
+- **SAU KHI HOÀN THÀNH MỖI BƯỚC**, lập tức ghi `~/.claude/ikame-goal-request.json` để tick bước đó — KHÔNG chờ đến cuối mới tick hết:
 
 ```json
 {
   "goalTitle": "Tên tính năng (phải khớp chính xác với title đã tạo)",
   "steps": [
-    { "description": "Bước 1", "status": "completed" },
-    { "description": "Bước 2", "status": "active" }
+    { "description": "Bước 1", "status": "completed" }
   ]
 }
 ```
 
+- Chỉ cần include bước vừa xong, không cần liệt kê tất cả
 - Dùng cùng 1 file `ikame-goal-request.json` cho cả create lẫn update. Extension phân biệt qua fields: `title` → tạo mới, `goalTitle`/`goalId` → update
 - Khi tất cả steps `completed`, goal tự động chuyển sang Completed
 - **Lý do dùng Goals thay vì TaskList:** Goals persist qua nhiều sessions. Khi context bị compact hoặc session mới, goal vẫn còn và Claude có thể resume từ đúng bước đang dở
@@ -100,6 +100,21 @@ Fix tất cả failing tests.
 
 Fix issues từ review, test, browser check. Re-run tests.
 
-## Phase 9 — Report
+## Phase 9 — Report & Complete
 
 Báo cáo: files thay đổi, tests passing, screenshots, known limitations.
+
+**Bắt buộc sau khi báo cáo:** Nếu đã tạo Goal ở Phase 3, phải mark tất cả steps là `completed` bằng cách ghi file:
+
+```json
+{
+  "goalTitle": "Tên tính năng (phải khớp chính xác với title đã tạo)",
+  "steps": [
+    { "description": "Bước 1", "status": "completed" },
+    { "description": "Bước 2", "status": "completed" },
+    { "description": "Bước N", "status": "completed" }
+  ]
+}
+```
+
+⚠️ KHÔNG được bỏ qua bước này — goal phải được tick hoàn thành trong Goals panel, không chỉ báo bằng lời.
