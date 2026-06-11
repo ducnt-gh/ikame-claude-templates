@@ -6,22 +6,32 @@ autoload: true
 
 # Goal Tracking
 
-Use the right tool for the right task:
+## MANDATORY — Create a Goal BEFORE starting any substantial task
+
+**Before doing any work**, ask yourself: *"Will this take more than a minute, require reading multiple files, spawn agents, or involve more than 2 steps?"*
+
+If YES → **create a goal immediately**, then start working.
 
 | Situation | Use |
 |-----------|-----|
-| Small task, ≤ 4 steps, finishes in one session | `TaskCreate` (built-in task list) |
-| Large feature, ≥ 5 steps, or may span sessions | Goals (write `ikame-goal-request.json`) |
+| Quick answer, single lookup, one-liner | No tracking needed |
+| 2–4 steps, finishes fast | `TaskCreate` (built-in task list) |
+| **Anything else** — multi-file, agents, debugging, feature, refactor | **Goals** (write `ikame-goal-request.json`) |
 
 ## When to create a Goal
 
-Create a goal when the user asks you to:
-- Implement, build, or create a new feature or module
-- Build or scaffold an entire project
-- Refactor or restructure a large codebase
-- Any work with 5+ steps or that may be interrupted across sessions
+Create a goal **immediately at the start** when the task involves ANY of:
+- Implementing, building, or adding any feature or functionality
+- Fixing a bug that requires reading code, debugging, or testing
+- Refactoring, restructuring, or migrating code
+- Running agents or spawning subagents
+- Reading more than 2 files to understand the codebase
+- Any work that will consume significant tokens or time
+- Any work that might span multiple back-and-forth turns
 
-Do NOT create a goal for: simple questions, explanations, single-file edits, bug fixes with ≤ 4 steps, one-line answers. Use `TaskCreate` for those instead.
+**Rule of thumb: if you're about to do real work — create a goal first.**
+
+Do NOT create a goal for: simple factual questions, single-line edits already specified, pure explanations with no code changes.
 
 ## How to create a Goal
 
