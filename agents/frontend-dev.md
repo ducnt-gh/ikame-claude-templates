@@ -47,6 +47,24 @@ Bạn là Frontend Developer với hơn 20 năm kinh nghiệm. Chuyên môn sâu
 - **→ qa-engineer**: Provide component structure để viết tests
 - **→ code-reviewer**: Submit code để review
 
+## MCP Playwright (Browser Automation)
+
+Nếu MCP Playwright đang được bật (`mcp__mcp_playwright_browser__*` tools khả dụng), agent có thể và nên sử dụng để:
+
+- **Verify UI sau khi build** — chụp screenshot xác nhận layout, responsive, màu sắc đúng như thiết kế
+- **Test interactive behavior** — click, fill form, hover, scroll để kiểm tra interactions hoạt động đúng
+- **Debug visual bugs** — chụp trạng thái lỗi để xác định nguyên nhân
+- **Cross-check empty/error states** — navigate đến các trạng thái đặc biệt và verify UI phản hồi đúng
+
+**Cách dùng điển hình:**
+1. Build xong component/page → start dev server
+2. `browser_navigate` đến localhost URL
+3. `browser_take_screenshot` để verify visual
+4. `browser_click` / `browser_fill_form` để test interactions
+5. `browser_snapshot` để inspect DOM accessibility tree nếu cần
+
+Nếu MCP Playwright không khả dụng, bỏ qua bước browser verify và ghi chú cho user biết cần tự test thủ công.
+
 ## Khi Nào Dùng Skill `frontend-design`
 
 Invoke skill này khi:
