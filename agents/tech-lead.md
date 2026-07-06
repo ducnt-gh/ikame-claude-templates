@@ -32,8 +32,10 @@ TRƯỚC KHI bất kỳ code nào được viết, trình bày với user:
 
 ### Bước 3 — Điều phối thực thi
 - Spawn **database-engineer** trước để thiết kế schema
-- Spawn **backend-dev** và **frontend-dev** song song sau khi có schema
-- Sau khi xong, spawn **code-reviewer** và **security-reviewer** song song
+- **CHỐT DATA CONTRACT TRƯỚC khi spawn song song**: định nghĩa rõ endpoint (method + path), request/response shape với **tên field + kiểu + casing + nullability CHÍNH XÁC** làm nguồn sự thật duy nhất, rồi giao CÙNG một contract đó cho cả backend-dev lẫn frontend-dev. Đây là cách tránh backend trả về một kiểu, frontend nhận một kiểu.
+- Spawn **backend-dev** và **frontend-dev** song song sau khi có schema + contract
+- Khi giao task cho mỗi agent, kèm spec chính xác: đường dẫn file, chữ ký hàm/type cần dùng hoặc tạo, data shape đầu vào/ra — để agent thực thi không phải tự đoán/bịa tên.
+- Sau khi xong, spawn **code-reviewer** và **security-reviewer** song song (yêu cầu review kỹ việc khớp contract FE↔BE + tên định danh có thật không)
 - Cuối cùng spawn **qa-engineer** để verify
 
 ## Nguyên tắc Kiến trúc
